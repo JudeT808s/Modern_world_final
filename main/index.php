@@ -40,6 +40,8 @@
     <div class="container">
 
         <div class="topStory width-8 ">
+        <a href= "addWriterForm.php">Add Author </a>
+
             <div class="heading width-8">
                 <?php
              foreach($topStories as $topStory){
@@ -52,7 +54,7 @@
                     <hr>
             </div>
 
-            <h1><?= $topStory->title ?></h1>
+            <h1><a href="article.php?id=<?=$topStory->id ?>"><?= $topStory->title ?></a></h1>
             <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= $topStory->date ?>
                 -<?= $topStory->time ?></p>
             <h5><?= $topStory->subtitle ?></h5>
@@ -96,12 +98,13 @@
             <div class="medium-text p-bottom">
                 <h2 class="bottom story-header"><?= $genre->name ?></h2>
                 <hr>
-                <h4><?= $sideArticle->title ?></h4>
+                <h4><a href="article.php?id=<?=$sideArticle->id ?>"><?= $sideArticle->title ?></a></h4>
                 <p class="preview"><?= $sideArticle->subtitle ?></p>
-
+                    <div class="writer">
                 <p><strong><?= $writer->first_name ?> <?= $writer->last_name ?></strong> -<?= $sideArticle->date ?>
                     - <?= $sideArticle->time ?>
                 </p>
+                </div>
             </div>
             <?php
 
@@ -121,11 +124,11 @@
     
     <?php
                     foreach($miniArticles as $miniArticle){
-                        $writer = Get::byId('writers', $miniArticle->writer_id);
+                        $writer = Get::byId('writers', $miniArticle->writer_id)
                     
                     ?>
     <div class="mini-article width-3">
-        <h5><?= $miniArticle->title ?></h5>
+        <h5><a href="article.php?id=<?=$miniArticle->id?>"><?= $miniArticle->title ?></a></h5>
         <p><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= $miniArticle->date ?> - <?= $miniArticle->time ?></p>
     </div>
     <?php

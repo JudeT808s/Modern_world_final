@@ -55,7 +55,8 @@ hr {
 
 .preview {
     font-size: 16px;
-    font-weight: 400
+    font-weight: 400;
+    text-align: left;
 }
 
 .p-bottom {
@@ -104,6 +105,10 @@ hr {
     text-align: center;
 }
 
+.writer {
+    text-align: center;
+}
+
 h5 {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
@@ -116,7 +121,45 @@ h5 {
     text-align: center;
 }
 
-.mini-article h5,
-p {
+.mini-article p {
+    text-align: center;
+}
+
+
+/* //////////////////////////////////////////////////////////////////////////////////////First Page ends////////////////////////////////////////////////////////////////////////////////////// */
+
+
+/* //////////////////////////////////////////////////////////////////////////////////////Inside Page Starts////////////////////////////////////////////////////////////////////////////////////// */
+
+.mainStory h1 {
+    font-family: 'Lora', serif;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.4em;
+    color: #363636;
+    margin-bottom: 12px;
+}
+
+
+/* Top Story Column  */
+
+.mainStory p {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 28px;
+    column-count: 3;
+    column-gap: 15px;
+}
+
+.mainStory p.date {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 28px;
+    column-count: 1;
+    text-align: center;
+}
+
+.mainStory h5 {
     text-align: center;
 }
