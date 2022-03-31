@@ -5,15 +5,32 @@
 
     //  Get::allOrderBy($articles, $date, $limit = 0, $skip = 0);
               
-    $sideArticles = Get::byCategory('Commerce', 2);
-    $topStories = Get::all('articles', 1);
+    $sideArticles = Get::all('articles', 2);
+    $topStories = Get::byCategoryOrderBy('Breaking','date DESC', 1);
     $miniArticles = Get::all('articles', 3);
     // $article =  Get::byId('articles');
     // $author = Get::byId('writers', $articles->writer_id );
-      
-  } catch (Exception $e) {
+
+    //Date
+    // function connorsDate($string) {
+    //     $formatDate = strtotime($string);
+    //     return date('l, j F', $formatDate);
+    // }
+
+    //     //Time
+    // function connorsTime($string) {
+    //     $formatTime = strtotime($string);
+    //     return date('g: h a', $formatTime);
+    // }
+
+    function mosDateTime($date, $time) {
+        return date_format(date_create($date . "T" . $time), 'l, j F - g: i a');
+    }
+}
+   catch (Exception $e) {
     die("Exception: " . $e->getMessage());
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -48,19 +65,17 @@
                 $writer = Get::byId('writers', $topStory->writer_id);
                 $genre = Get::byId('genres', $topStory->genre_id);
 
-
             ?>
                 <h2 class="story-header"><?= $genre->name ?></h1>
                     <hr>
             </div>
 
             <h1><a href="article.php?id=<?=$topStory->id ?>"><?= $topStory->title ?></a></h1>
-            <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= $topStory->date ?>
-                -<?= $topStory->time ?></p>
+            <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($topStory->date, $topStory->time) ?>
             <h5><?= $topStory->subtitle ?></h5>
             <div class="nested">
                 <div class="width-12">
-                    <p> <?= $topStory->article ?>
+                    <p> <?= nl2br($topStory->article) ?>
                     
                     </p>
 
@@ -101,8 +116,7 @@
                 <h4><a href="article.php?id=<?=$sideArticle->id ?>"><?= $sideArticle->title ?></a></h4>
                 <p class="preview"><?= $sideArticle->subtitle ?></p>
                     <div class="writer">
-                <p><strong><?= $writer->first_name ?> <?= $writer->last_name ?></strong> -<?= $sideArticle->date ?>
-                    - <?= $sideArticle->time ?>
+                <p><strong><?= $writer->first_name ?> <?= $writer->last_name ?></strong> - <?= mosDateTime($sideArticle->date, $sideArticle->time) ?>
                 </p>
                 </div>
             </div>
@@ -129,7 +143,7 @@
                     ?>
     <div class="mini-article width-3">
         <h5><a href="article.php?id=<?=$miniArticle->id?>"><?= $miniArticle->title ?></a></h5>
-        <p><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= $miniArticle->date ?> - <?= $miniArticle->time ?></p>
+        <p class= "writer"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($miniArticle->date , $miniArticle->time) ?></p>
     </div>
     <?php
                     }

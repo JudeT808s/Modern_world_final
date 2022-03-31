@@ -121,7 +121,11 @@ h5 {
     text-align: center;
 }
 
-.mini-article p {
+.side-article h5 {
+    text-align: center;
+}
+
+.mini-article h5 {
     text-align: center;
 }
 
@@ -162,4 +166,14 @@ h5 {
 
 .mainStory h5 {
     text-align: center;
+}
+
+.related h2 {
+    font-size: 16px;
+}
+
+.side-header {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
 }

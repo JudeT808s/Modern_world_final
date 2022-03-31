@@ -20,7 +20,7 @@ class Connection
         $host = "localhost";
         $database = DATABASE_NAME;
         $username = "root";
-        $password = "root";
+        $password = "";
 
         $dsn = "mysql:dbname=" . $database . ";host=" . $host;
 
@@ -38,9 +38,9 @@ class Connection
 
 class Post
 {
-    public function create($tableName, $data)
+    public static function create($tableName, $data)
     {
-       $sql = "INSERT INTO " . $tableName . "(" . implode(array_keys($data), ", ") . ") VALUES ('" . implode(array_values($data), "', '") . "')";
+       $sql = "INSERT INTO " . $tableName . "(" . implode(", ", array_keys($data)) . ") VALUES ('" . implode("', '", array_values($data)) . "')";
        
        var_dump($sql);
 
@@ -59,7 +59,7 @@ class Post
         }
     }
 
-    public function edit($tableName, $id, $data)
+    public static function edit($tableName, $id, $data)
     {
       $sql = 'UPDATE ' . $tableName . ' SET ';
       $count = 0;

@@ -18,17 +18,17 @@
         <form method="POST" action="addWriter.php">
             <div>
             <label>First Name</label><br>
-            <input type="text">
+            <input type="text" name= "first_name"/>
     </div>
             <div>
             <label>Last Name</label><br>
-            <input type="text">
+            <input type="text" name= "last_name"/>
     </div>
             <div>
             <label>Link</label><br>
-            <input type="text">
+            <input type="text" name= "link"/>
     </div>
-    <a href="index.php">Cancel</a><br>
+    <a href="index.php">Cancel</a>
     <input type="submit">
     </form>
     </div>
