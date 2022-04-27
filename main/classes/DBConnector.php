@@ -20,7 +20,7 @@ class Connection
         $host = "localhost";
         $database = DATABASE_NAME;
         $username = "root";
-        $password = "";
+        $password = "root";
 
         $dsn = "mysql:dbname=" . $database . ";host=" . $host;
 
@@ -40,8 +40,8 @@ class Post
 {
     public static function create($tableName, $data)
     {
-       $sql = "INSERT INTO " . $tableName . "(" . implode(", ", array_keys($data)) . ") VALUES ('" . implode("', '", array_values($data)) . "')";
-       
+       $sql = "INSERT INTO " . $tableName . "(" . implode( ", ", array_keys($data)) . ") VALUES ('" . implode( "', '",array_values($data)) . "')";
+
        var_dump($sql);
 
         $conn = Connection::getInstance();

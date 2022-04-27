@@ -1,3 +1,32 @@
+<?php
+session_start();
+if(isset($_SESSION["data"]) and isset($_SESSION["errors"])){
+    $writer_data = $_SESSION["data"];
+    $errors = $_SESSION["errors"];
+}
+else{
+    $writer_data = [];
+    $errors = [];
+}
+   
+
+echo "<pre>\$data =";
+print_r($data);
+echo "</pre>";
+
+echo "<pre>\$writer =";
+print_r($writer);
+echo "</pre>";
+ 
+echo "<pre>\$errors =";
+print_r($errors);
+echo "</pre>";
+
+require_once 'classes/DBConnector.php';
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,20 +47,44 @@
         <form method="POST" action="addWriter.php">
             <div>
             <label>First Name</label><br>
-            <input type="text" name= "first_name"/>
+            <input id= "first_name"type="text" name= "first_name"/>
+            <?php if (isset($writer_data["first_name"])) echo $writer_data["first_name"]; ?>
+            <div id="first_name_error" class="error">
+                <?php if (isset($errors["first_name"])) echo $errors["first_name"]; ?>
     </div>
+</div>
             <div>
             <label>Last Name</label><br>
-            <input type="text" name= "last_name"/>
+            <input id= "last_name"type="text" name= "last_name"/>
+            <?php if (isset($writer_data["last_name"])) echo $writer_data["last_name"]; ?>
+            <div id="last_name_error" class="error">
+                <?php if (isset($errors["last_name"])) echo $errors["last_name"]; ?>
     </div>
+</div>
             <div>
             <label>Link</label><br>
-            <input type="text" name= "link"/>
+            <input id= "link"type="text" name= "link"/>
+            <?php if (isset($writer_data["link"])) echo $writer_data["link"]; ?>
+            <div id="link_error" class="error">
+                <?php if (isset($errors["link"])) echo $errors["link"]; ?>
+    </div>
     </div>
     <a href="index.php">Cancel</a>
-    <input type="submit">
+    <button id= "submit_btn"
+     type="submit" formaction= "addWriter.php">Submit</button>
     </form>
     </div>
     <div class="clear"></div>
+    <!-- <script src="js/writer_validate.js"></script> -->
 </body>
 </html>
+
+
+<?php
+
+if (isset($_SESSION["data"]) and isset($_SESSION["errors"])){
+    unset($_SESSION["data"]);
+    unset($_SESSION["errors"]);
+    
+}
+?>

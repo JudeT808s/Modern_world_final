@@ -1,27 +1,32 @@
 <?php
   require_once 'classes/DBConnector.php';
 
+  function truncate($string, $length=100, $append="&hellip;") {
+
+ 
+    $string = trim($string);
+
+    if(strlen($string) > $length) {
+      $string = str_replace("\n", " ", $string);
+      $string = wordwrap($string, $length);
+
+      $string = explode("\n", $string, 2);
+      $string = $string[0] . $append;
+    }
+
+
+    return $string;
+  }
+
   try {
 
     //  Get::allOrderBy($articles, $date, $limit = 0, $skip = 0);
-              
+    // $story = Get::byId('articles', $_GET['id']);
+          
     $sideArticles = Get::all('articles', 2);
     $topStories = Get::byCategoryOrderBy('Breaking','date DESC', 1);
     $miniArticles = Get::all('articles', 3);
-    // $article =  Get::byId('articles');
-    // $author = Get::byId('writers', $articles->writer_id );
-
-    //Date
-    // function connorsDate($string) {
-    //     $formatDate = strtotime($string);
-    //     return date('l, j F', $formatDate);
-    // }
-
-    //     //Time
-    // function connorsTime($string) {
-    //     $formatTime = strtotime($string);
-    //     return date('g: h a', $formatTime);
-    // }
+    $categorys = Get::all('genres');
 
     function mosDateTime($date, $time) {
         return date_format(date_create($date . "T" . $time), 'l, j F - g: i a');
@@ -55,9 +60,21 @@
 
 <body>
     <div class="container">
+    <!-- width-12  -->
+    <!-- <div class="nested"> -->
+
+    <?php foreach($categorys as $category) { ?>
+        <!-- <div class="genre width-1 "> -->
+        <div class="nav-bar box width-1">
+        <h3><a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li></h3>
+        </div> 
+        <!-- </div> -->
+<?php } ?>
+    <!-- </div> -->
 
         <div class="topStory width-8 ">
         <a href= "addWriterForm.php">Add Author </a>
+        <a href= "addArticleForm.php">Add Article </a>
 
             <div class="heading width-8">
                 <?php
@@ -75,7 +92,7 @@
             <h5><?= $topStory->subtitle ?></h5>
             <div class="nested">
                 <div class="width-12">
-                    <p> <?= nl2br($topStory->article) ?>
+                    <p> <?= nl2br(truncate($topStory->article, 750)) ?>
                     
                     </p>
 
@@ -85,13 +102,16 @@
 
 
             </div>
-        </div>
         <?php
              }
     ?>
+            <a href="updateArticleForm.php?id=<?= $topStory->id ?>"> Edit </a>
+            </div>
+
+
         <!-- 1 Grid Gap -->
-        <div class="width-1"></div>
-        <div class="medium width-3">
+        <!-- <div class="width-1"></div> -->
+        <div class="medium width-4">
             <!-- <div class="medium-text p-bottom">
                 <h2 class="bottom story-header">Breaking</h2>
                 <h4>The Russian threat to invade Ukraine</h4>
@@ -114,17 +134,20 @@
                 <h2 class="bottom story-header"><?= $genre->name ?></h2>
                 <hr>
                 <h4><a href="article.php?id=<?=$sideArticle->id ?>"><?= $sideArticle->title ?></a></h4>
-                <p class="preview"><?= $sideArticle->subtitle ?></p>
+                <p class="preview"><?= truncate($sideArticle->subtitle, 100) ?></p>
                     <div class="writer">
                 <p><strong><?= $writer->first_name ?> <?= $writer->last_name ?></strong> - <?= mosDateTime($sideArticle->date, $sideArticle->time) ?>
                 </p>
                 </div>
+                <a href="updateArticleForm.php?id=<?= $sideArticle->id ?>"> Edit </a>
+
             </div>
             <?php
 
                     }
 
                     ?>
+                    
         </div>
 
 
@@ -144,6 +167,8 @@
     <div class="mini-article width-3">
         <h5><a href="article.php?id=<?=$miniArticle->id?>"><?= $miniArticle->title ?></a></h5>
         <p class= "writer"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($miniArticle->date , $miniArticle->time) ?></p>
+        <a href="updateArticleForm.php?id=<?= $miniArticle->id ?>"> Edit </a>
+
     </div>
     <?php
                     }

@@ -5,13 +5,27 @@
 
     //  Get::allOrderBy($articles, $date, $limit = 0, $skip = 0);
               
-    // $sideArticles = Get::byCategory('Commerce', 4);
-    $suggestedArticles = Get::byCategoryOrderBy('Breaking','date DESC', 4);
-    $story = Get::byId('articles', $_GET['id']);
-    $genre = Get::byId('genres', $story->genre_id);
+    // $suggestedArticles = Get::byCategoryOrderBy('Breaking','date DESC', 4);
+    // $story = Get::byId('articles', $_GET['id']);
+    $genre = Get::byId('genres', $_GET['id']);
+    $story = Get::byCategory($genre->name);
+     $main = Get::byCategory($genre->name, 1);
+
+      echo "<pre>\$genre =";
+  print_r($genre);
+  echo "</pre>";
+    echo "<pre>\$story =";
+  print_r($story);
+  echo "</pre>";
+    // $topStory = Get::byCategoryOrderBy('Breaking','date DESC', 1);
+    // $genre = Get::byId('genres', $story->genre_id);
+    $categorys = Get::all('genres');
     $sideArticles = Get::byCategory($genre->name, 3);
-    $writer = Get::byId('writers', $story->writer_id );
-    // $writer = Get::byId('writers', $topStories->writer_id );
+     $suggestedArticles = Get::byCategoryOrderBy($genre->name,'date DESC', 4);
+
+    
+
+    // $writer = Get::byId('writers', $story->writer_id );
 
     function mosDateTime($date, $time) {
         return date_format(date_create($date . "T" . $time), 'l, j F - g: i a');
@@ -44,7 +58,16 @@
 
 <body>
     <div class="container">
+    
+    <div class="nav-bar width-12">
+    <ul> 
+    <!-- <div class="nested"> -->
 
+    <?php foreach($categorys as $category) { ?>
+        <a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li>
+<?php } ?>
+    </ul>
+    </div>
 
         <div class="mainStory width-9 ">
             <div class="heading width-8">
@@ -93,6 +116,7 @@
                 }
                     ?>
         </div>
+            </div>
 
         <!--Suggested Stories-->
             <!-- <div class="mini-article">
@@ -118,6 +142,7 @@
             <?php
                     
                  }
+
                     ?>
     </div>
 </body>
