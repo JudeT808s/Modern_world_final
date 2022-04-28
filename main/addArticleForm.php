@@ -5,26 +5,26 @@ if(isset($_SESSION["data"]) and isset($_SESSION["errors"])){
     $errors = $_SESSION["errors"];
 }
 else{
-    $article_data = [];
+    $data = [];
     $errors = [];
 }
    
 
-echo "<pre>\$data =";
-print_r($data);
-echo "</pre>";
 
-echo "<pre>\$article =";
-print_r($article);
-echo "</pre>";
 
-echo "<pre>\$article_data =";
-print_r($article_data);
-echo "</pre>";
+// echo "<pre>\$article =";
+// print_r($article);
+// echo "</pre>";
+
+
  
-echo "<pre>\$errors =";
-print_r($errors);
-echo "</pre>";
+// echo "<pre>\$data =";
+// print_r($data);
+// echo "</pre>";
+ 
+// echo "<pre>\$errors =";
+// print_r($errors);
+// echo "</pre>";
 
   require_once 'classes/DBConnector.php';
 
@@ -32,6 +32,8 @@ echo "</pre>";
       
     $genres = Get::all('genres');
     $writers = Get::all('writers');
+     $categorys = Get::all('genres');
+
       
   } 
   catch (Exception $e) {
@@ -54,29 +56,28 @@ echo "</pre>";
     <title>Add Article</title>
 </head>
 <body>
+
+
     <div class="width-6">
         <h1>Add a new Article</h1>
         <form method="POST" action="addArticle.php">
             <div>
             <label>Heading</label><br>
-            <input id= "heading"type="text" name= "heading" value="
-            <?php if (isset($article_data["heading"])) echo $article_data["heading"]; ?>">
+            <input id= "heading"type="text" name= "heading" value="<?php if (isset($article_data["heading"])) echo $article_data["heading"]; ?>">
             <div id="heading_error" class="error">
                 <?php if (isset($errors["heading"])) echo $errors["heading"]; ?>
     </div>
 </div>
             <div>
             <label>Title</label><br>
-            <input id="title"type="title" name= "title"/>
-            <?php if (isset($article_data["title"])) echo $article_data["title"]; ?>
+            <input id="title"type="title" name= "title" value= "<?php if (isset($article_data["title"])) echo $article_data["title"]; ?>">
             <div id="title_error" class="error">
                 <?php if (isset($errors["title"])) echo $errors["title"]; ?>
     </div>
 </div>
             <div>
             <label>Subtitle</label><br>
-            <input id="subtitle"type="subtitle" name= "subtitle"/>
-            <?php if (isset($article_data["subtitle"])) echo $article_data["subtitle"]; ?>
+            <input id="subtitle"type="subtitle" name= "subtitle" value = "<?php if (isset($article_data["subtitle"]))  echo $article_data["subtitle"]; ?>">
             <div id="subtitle_error" class="error">
                 <?php if (isset($errors["subtitle"])) echo $errors["subtitle"]; ?>
     </div>
@@ -92,16 +93,15 @@ echo "</pre>";
             
             <div>
             <label>Date</label><br>
-            <input id="date"type="date" name= "date"/>
-            <?php if (isset($article_data["date"])) echo $article_data["date"]; ?>
+            <input id="date"type="date" name= "date" value="<?php if (isset($article_data["date"])) echo $article_data["date"]; ?>">
             <div id="date_error" class="error">
                 <?php if (isset($errors["date"])) echo $errors["date"]; ?>
     </div>
 </div>
             <div>
             <label>Time</label><br>
-            <input id="time"type="time" name= "time"/>
-            <?php if (isset($article_data["time"])) echo $article_data["time"]; ?>
+            <input id="time"type="time" name= "time" value="
+            <?php if (isset($article_data["time"])) echo $article_data["time"]; ?>">
             <div id="time_error" class="error">
                 <?php if (isset($errors["time"])) echo $errors["time"]; ?>
             
@@ -129,7 +129,7 @@ echo "</pre>";
     </div>
 
 
-            
+            <!-- Resets Writer and Genre error look at webDev -->
             <div>
             <label>Genre</label><br>
             <select id="genre" name="genre_id">
@@ -156,6 +156,7 @@ echo "</pre>";
     </form>   
     </div>
     <div class="clear"></div>
+    <!-- <script src="js/article_validate.js"></script> -->
 </body>
 </html>
 

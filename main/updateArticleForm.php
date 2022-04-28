@@ -80,8 +80,7 @@
     </div>
             <div>
             <label>Article text</label><br>
-            <textarea id="article"name="article" rows="10" cols= "40">
-                        <?php  echo $story->article; ?>
+            <textarea id="article"name="article" rows="10" cols= "40"><?php echo $story->article; ?>
 </textarea>
             
     </div>
@@ -149,8 +148,7 @@
     </div>
     <a href="index.php">Cancel</a>
     <button id= "update_btn"
-     type="submit" formaction= "updateArticle.php" >Update</button>
-
+     type="submit" formaction= "updateArticle.php?id=<?=$story->id ?>">Update</button>
     <button id= "delete_btn">Delete</button>
     </form>   
     </div>

@@ -20,7 +20,7 @@ class Connection
         $host = "localhost";
         $database = DATABASE_NAME;
         $username = "root";
-        $password = "root";
+        $password = "";
 
         $dsn = "mysql:dbname=" . $database . ";host=" . $host;
 

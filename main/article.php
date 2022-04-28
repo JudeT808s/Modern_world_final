@@ -9,6 +9,7 @@
     $suggestedArticles = Get::byCategoryOrderBy('Breaking','date DESC', 4);
     $story = Get::byId('articles', $_GET['id']);
     $genre = Get::byId('genres', $story->genre_id);
+    $categorys = Get::all('genres');
     $sideArticles = Get::byCategory($genre->name, 3);
     $writer = Get::byId('writers', $story->writer_id );
     // $writer = Get::byId('writers', $topStories->writer_id );
@@ -44,9 +45,17 @@
 
 <body>
     <div class="container">
+    <div class="home box width-1"><a href= "http://localhost/iadt-cc-Y1/modern_world/reimagined-goggles/main/"><h3>home</h3></a></div>
+    <?php foreach($categorys as $category) { ?>
+        <!-- <div class="genre width-1 "> -->
+        <div class="nav-bar box width-1">
+        <h3><a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li></h3>
+        </div> 
+        <!-- </div> -->
+<?php } ?>
 
 
-        <div class="mainStory width-9 ">
+        <div class="mainStory width-8 ">
             <div class="heading width-8">
                 <h2 class="story-header"><?= $story->heading ?></h1>
                     <hr>
@@ -64,11 +73,13 @@
 
 
             </div>
+            <a href="updateArticleForm.php?id=<?= $story->id ?>"> Edit </a>
+
         </div>
 
 
         <!-- Mini Related Bar-->
-        <div class="Related width-3">
+        <div class="Related width-4">
             <h2>Related Stories</h2>
             <!-- <hr> -->
             <?php

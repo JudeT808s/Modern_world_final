@@ -62,7 +62,6 @@
     <div class="container">
     <!-- width-12  -->
     <!-- <div class="nested"> -->
-
     <?php foreach($categorys as $category) { ?>
         <!-- <div class="genre width-1 "> -->
         <div class="nav-bar box width-1">

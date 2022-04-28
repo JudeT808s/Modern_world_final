@@ -8,24 +8,24 @@
     // $suggestedArticles = Get::byCategoryOrderBy('Breaking','date DESC', 4);
     // $story = Get::byId('articles', $_GET['id']);
     $genre = Get::byId('genres', $_GET['id']);
-    $story = Get::byCategory($genre->name);
+    $story = Get::byCategory($genre->name)[0];
      $main = Get::byCategory($genre->name, 1);
 
-      echo "<pre>\$genre =";
-  print_r($genre);
-  echo "</pre>";
-    echo "<pre>\$story =";
-  print_r($story);
-  echo "</pre>";
+//       echo "<pre>\$genre =";
+//   print_r($genre);
+//   echo "</pre>";
+//     echo "<pre>\$story =";
+//   print_r($story);
+//   echo "</pre>";
     // $topStory = Get::byCategoryOrderBy('Breaking','date DESC', 1);
     // $genre = Get::byId('genres', $story->genre_id);
     $categorys = Get::all('genres');
-    $sideArticles = Get::byCategory($genre->name, 3);
-     $suggestedArticles = Get::byCategoryOrderBy($genre->name,'date DESC', 4);
+    $sideArticles = Get::byCategoryOrderBy($genre->name,'date DESC', 4);
+     $suggestedArticles = Get::all('articles', 3);
 
     
 
-    // $writer = Get::byId('writers', $story->writer_id );
+    $writer = Get::byId('writers', $story->writer_id );
 
     function mosDateTime($date, $time) {
         return date_format(date_create($date . "T" . $time), 'l, j F - g: i a');
@@ -58,24 +58,26 @@
 
 <body>
     <div class="container">
+
     
-    <div class="nav-bar width-12">
-    <ul> 
-    <!-- <div class="nested"> -->
-
+    
+   
+    <div class="home box width-1"><a href= "http://localhost/iadt-cc-Y1/modern_world/reimagined-goggles/main/"><h3>home</h3></a></div>
     <?php foreach($categorys as $category) { ?>
-        <a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li>
+        <!-- <div class="genre width-1 "> -->
+        <div class="nav-bar box width-1">
+        <h3><a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li></h3>
+        </div> 
+        <!-- </div> -->
 <?php } ?>
-    </ul>
-    </div>
 
-        <div class="mainStory width-9 ">
+        <div class="mainStory width-8 ">
             <div class="heading width-8">
                 <h2 class="story-header"><?= $story->heading ?></h1>
                     <hr>
             </div>
             
-            <h1><?= $story->title ?></h1>
+            <h1><a href="article.php?id=<?=$story->id ?>"><?= $story->title ?></a></h1>
             <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($story->date , $story->time) ?></p>
             <h5><?= $story->subtitle ?></h5>
             <div class="nested">
@@ -91,7 +93,7 @@
 
 
         <!-- Mini Related Bar-->
-        <div class="Related width-3">
+        <div class="Related width-4">
             <h2>Related Stories</h2>
             <!-- <hr> -->
             <?php

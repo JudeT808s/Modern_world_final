@@ -35,13 +35,14 @@
   // echo "</pre>";
 
   try {
-    $story = Get::byId('articles', $_GET['id']);
-    $genre = Get::byId('genres', $story->genre_id);
-    $writer = Get::byId('writers', $story->writer_id );
-    $genres = Get::all('genres');
-    $writers = Get::all('writers');
+     $id = $_GET['id'];
+    // $genre = Get::byId('genres', $story->genre_id);
+    // $writer = Get::byId('writers', $story->writer_id );
+    // $genres = Get::all('genres');
+    // $writers = Get::all('writers');
 
     $data = [
+        'id' => $_GET['id'],
         'heading' => $_POST['heading'],
         'title' => $_POST['title'],
         'subtitle' => $_POST['subtitle'],
@@ -52,9 +53,9 @@
         'genre_id' => $_POST['genre_id']
       ];
 
-      Post::edit('articles', $story->id, $data);
+      Post::edit('articles', $_GET['id'], $data);
                   
-      // header("Location: index.php");
+      header("Location: index.php");
       
   } 
   catch (Exception $e) {

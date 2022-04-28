@@ -19,7 +19,6 @@ let linkError = document.getElementById('link_error');
  * REGEX PATTERNS
  */
 const NAME_REGEX = /^[a-zA-Z-' ]*$/;
-//Doesn't work properly so disabled for now
 const LINK_REGEX = / ^ ((ftp | http | https): \/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
 
@@ -28,7 +27,6 @@ submitBtn.addEventListener('click', onSubmitForm);
 let errorExists = false;
 
 function showError(errorField, errorMessage) {
-
     errorExists = true;
     errorField.innerHTML = errorMessage;
 }

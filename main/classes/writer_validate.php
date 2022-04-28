@@ -1,18 +1,18 @@
 <?php
 // Sanitise
-function sanitize_input($writer_data){
-    $writer_data = trim($writer_data);
-    $writer_data= stripcslashes($writer_data);
-    $writer_data = htmlspecialchars($writer_data);
+function sanitize_input($writer){
+    $writer = trim($writer);
+    $writer= stripcslashes($writer);
+    $writer = htmlspecialchars($writer);
 
-    return $writer_data;
+    return $writer;
  }
 // Sanitise end
 
 
 
 
-// Validation
+// // Validation
 function validate_name($name){
     $pattern = "/^[a-zA-Z' ]*$/";
     return preg_match($pattern, $name) === 1;
@@ -53,46 +53,45 @@ function validate_name($name){
 
 
 
-// Valdation End
+// // Valdation End
     // Error Field
-function writer_validate($writer_data){
-
+function writer_validate($writer){
         $errors= [];
-        $writer=[];
+        $data=[];
     
-        if(isset($writer_data['id'])){
-            $writer['id'] = $writer_data['id'];
-        }
+        // if(isset($writer['id'])){
+        //     $writer['id'] = $writer['id'];
+        // }
     
         // Validate Name
-        if(empty($writer_data["first_name"])){
+        if(empty($writer["first_name"])){
             $errors["first_name"]= "The name field is required";
         }
     
         else{
-            $writer["first_name"]= sanitize_input($writer_data["first_name"]);
+            $writer["first_name"]= sanitize_input($writer["first_name"]);
             if(!validate_name($writer["first_name"])){
                 $errors["first_name"] = "Only letters and spaces are allowed.";
             }
         }
         // Validate Last Name
-        if(empty($writer_data["last_name"])){
+        if(empty($writer["last_name"])){
             $errors["last_name"]= "The name field is required";
         }
     
         else{
-            $writer["last_name"]= sanitize_input($writer_data["last_name"]);
+            $writer["last_name"]= sanitize_input($writer["last_name"]);
             if(!validate_name($writer["last_name"])){
                 $errors["last_name"] = "Only letters and spaces are allowed.";
             }
         }
         // Validate Link
-        if(empty($writer_data["link"])){
+        if(empty($writer["link"])){
             $errors["link"]= "The website link is required";
         }
     
         else{
-            $writer["link"]= sanitize_input($writer_data["link"]);
+            $writer["link"]= sanitize_input($writer["link"]);
             if(!validate_link($writer["link"])){
                 $errors["link"] = "Invalid website format";
             }

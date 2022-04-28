@@ -1,11 +1,11 @@
 <?php
 session_start();
 if(isset($_SESSION["data"]) and isset($_SESSION["errors"])){
-    $writer_data = $_SESSION["data"];
+    $writer = $_SESSION["data"];
     $errors = $_SESSION["errors"];
 }
 else{
-    $writer_data = [];
+    $data = [];
     $errors = [];
 }
    
@@ -22,7 +22,19 @@ echo "<pre>\$errors =";
 print_r($errors);
 echo "</pre>";
 
+
 require_once 'classes/DBConnector.php';
+
+try {
+      
+    $categorys = Get::all('genres');
+
+      
+  } 
+  catch (Exception $e) {
+    die("Exception: " . $e->getMessage());
+  }
+
 
 
 ?>
@@ -42,29 +54,25 @@ require_once 'classes/DBConnector.php';
     <title>Add Writer</title>
 </head>
 <body>
-    <div class="width-6">
+    <div class="width-12">
         <h1>Add a new Writer</h1>
-        <form method="POST" action="addWriter.php">
+        <form method="POST">
             <div>
-            <label>First Name</label><br>
-            <input id= "first_name"type="text" name= "first_name"/>
-            <?php if (isset($writer_data["first_name"])) echo $writer_data["first_name"]; ?>
+            <label>First Name</label><br> <input id="first_name" type="text" name="first_name" value="<?php if (isset($writer["first_name"])) echo $writer["first_name"]; ?>">
             <div id="first_name_error" class="error">
                 <?php if (isset($errors["first_name"])) echo $errors["first_name"]; ?>
     </div>
 </div>
             <div>
             <label>Last Name</label><br>
-            <input id= "last_name"type="text" name= "last_name"/>
-            <?php if (isset($writer_data["last_name"])) echo $writer_data["last_name"]; ?>
+            <input id="last_name" type="text" name="last_name" value="<?php if (isset($writer["last_name"])) echo $writer["last_name"]; ?>">
             <div id="last_name_error" class="error">
                 <?php if (isset($errors["last_name"])) echo $errors["last_name"]; ?>
     </div>
 </div>
             <div>
             <label>Link</label><br>
-            <input id= "link"type="text" name= "link"/>
-            <?php if (isset($writer_data["link"])) echo $writer_data["link"]; ?>
+            <input id= "link"type="text" name="link" value="<?php if (isset($writer["link"])) echo $writer["link"]; ?>">
             <div id="link_error" class="error">
                 <?php if (isset($errors["link"])) echo $errors["link"]; ?>
     </div>
@@ -75,12 +83,24 @@ require_once 'classes/DBConnector.php';
     </form>
     </div>
     <div class="clear"></div>
-    <!-- <script src="js/writer_validate.js"></script> -->
+    <script src="js/writer_validate.js"></script>
 </body>
 </html>
 
 
 <?php
+
+echo "<pre>\$data =";
+print_r($data);
+echo "</pre>";
+
+echo "<pre>\$writer =";
+print_r($writer);
+echo "</pre>";
+ 
+echo "<pre>\$errors =";
+print_r($errors);
+echo "</pre>";
 
 if (isset($_SESSION["data"]) and isset($_SESSION["errors"])){
     unset($_SESSION["data"]);
