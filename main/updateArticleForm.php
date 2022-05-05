@@ -26,6 +26,8 @@
 // print_r($errors);
 // echo "</pre>";
 
+
+
   require_once 'classes/DBConnector.php';
 
   try {
@@ -43,8 +45,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<link
+    <link
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/reset.css">
@@ -55,85 +58,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Article</title>
 </head>
+
 <body>
     <div class="width-6">
         <h1>Add a new Article</h1>
         <form method="POST" action="addArticle.php">
             <div>
-            <label>Heading</label><br>
-            <input id= "heading"type="text" name= "heading"            
-            value= '<?php  echo $story->heading; ?>'/>
-    </div>
+                <label>Heading</label><br>
+                <input id="heading" type="text" name="heading" value='<?php  echo $story->heading; ?>' />
+            </div>
             <div>
-            <label>Title</label><br>
-            <input id="title"type="title" name= "title"
-            value= '<?php  echo $story->title; ?>'/>
+                <label>Title</label><br>
+                <input id="title" type="title" name="title" value='<?php  echo $story->title; ?>' />
 
-            
-    </div>
-            <div>
-            <label>Subtitle</label><br>
-            <input id="subtitle"type="subtitle" name= "subtitle"
-                        value= '<?php  echo nl2br($story->article) ?>; ?>'/>
 
-            
-    </div>
+            </div>
             <div>
-            <label>Article text</label><br>
-            <textarea id="article"name="article" rows="10" cols= "40"><?php echo $story->article; ?>
+                <label>Subtitle</label><br>
+                <input id="subtitle" type="subtitle" name="subtitle" value='<?php  echo nl2br($story->subtitle) ?>'>
+
+
+            </div>
+            <div>
+                <label>Article text</label><br>
+                <textarea id="article" name="article" rows="10" cols="97"><?php echo $story->article; ?>
 </textarea>
-            
-    </div>
-</div>
-            
-            <div>
-            <label>Date</label><br>
-            <input id="date"type="date" name= "date"
-                        value= '<?php  echo $story->date; ?>'/>
 
-            <?php if (isset($article_data["date"])) echo $article_data["date"]; ?>
-            <div id="date_error" class="error">
-                <?php if (isset($errors["date"])) echo $errors["date"]; ?>
+            </div>
     </div>
-</div>
-            <div>
-            <label>Time</label><br>
-            <input id="time"type="time" name= "time"
-                        value= '<?php  echo $story->time; ?>'/>
 
-            
-            
+    <div>
+        <label>Date</label><br>
+        <input id="date" type="date" name="date" value='<?php  echo $story->date; ?>' />
+
+        <?php if (isset($article_data["date"])) echo $article_data["date"]; ?>
+        <div id="date_error" class="error">
+            <?php if (isset($errors["date"])) echo $errors["date"]; ?>
+        </div>
     </div>
-     <div>
-            <label>Writer</label><br>
-            <select id="writer" name="writer_id">
+    <div>
+        <label>Time</label><br>
+        <input id="time" type="time" name="time" value='<?php  echo $story->time; ?>' />
+
+
+
+    </div>
+    <div>
+        <label>Writer</label><br>
+        <select id="writer_id" name="writer_id">
             <option value="<?=  $writer->id ?>" selected><?= $writer->first_name?> <?= $writer->last_name?></option>
             <?php foreach($writers as $writer) { ?>
 
-                <option value="<?= $writer->id ?>"><?= $writer->first_name?> <?= $writer->last_name?>
+            <option value="<?= $writer->id ?>"><?= $writer->first_name?> <?= $writer->last_name?>
 
-<?php      
+                <?php      
 
             $writer->id."</option>";
 } ?>
 
-            </select>
-          
-            
-
-</div>
+        </select>
 
 
 
-            
-            <div>
-            <label>Genre</label><br>
-            <select id="genre" name="genre_id">
+    </div>
+
+
+
+
+    <div>
+        <label>Genre</label><br>
+        <select id="genre_id" name="genre_id">
             <option value="<?=  $genre->id ?>" selected><?= $genre->name?></option>
             <?php foreach($genres as $genre) { ?>
 
-                <option value="<?= $genre->id ?>"><?= $genre->name?>
-                
+            <option value="<?= $genre->id ?>"><?= $genre->name?>
+
                 <?php       
                  if(isset($article_data["genre"]) && $article_data["genre"] === $genre['id']) echo "selected";
 
@@ -141,20 +140,19 @@
 
  
         } ?>
-            </select>
-          
+        </select>
+
 
     </div>
     </div>
     <a href="index.php">Cancel</a>
-    <button id= "update_btn"
-     type="submit" formaction= "updateArticle.php?id=<?=$story->id ?>">Update</button>
-    <button id= "delete_btn">Delete</button>
-    </form>   
+    <button id="update_btn" type="submit" formaction="updateArticle.php?id=<?=$story->id ?>">Update</button>
+    <button id="delete_btn">Delete</button>
+    </form>
     </div>
     <div class="clear"></div>
 </body>
+
 </html>
 
 <?php
-

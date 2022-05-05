@@ -15,7 +15,7 @@ function sanitize_input($article){
 // Validation
 
 function validate_name($name){
-    $pattern = "/^[a-zA-Z' ]*$/";
+    $pattern = "/^[a-zA-Z' ' ]*$/";
     return preg_match($pattern, $name) === 1;
 }
 /*
@@ -38,12 +38,7 @@ function validate_name($name){
         //  function validate_date($date) {
         //     $pattern = '/^([0-9]{4})\\-([0-9]{2})\\-([0-9]{2})$/';
         //      $matches = array(); 
-        //      $valid = (preg_match($pattern, $date, $matches) === 1);
-        //       if ($valid) {
-        //     $valid = (checkdate($matches[2], $matches[3], $matches[1]));
-        //     }
-        //     return $valid;
-        //     }
+        //      $valid = /
 
         function validate_genre($_genre){
             try{ 
@@ -101,19 +96,40 @@ function validate_name($name){
         return in_array($_writer, $writerArray);
     }
 
-        
+
+
+   /*  function validateDate($date, $format = 'Y-m-d'){
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) === $date;
+    } */
+
+     function validate_date($date){
+    $check = explode('-', $date);
+    if (checkdate($check[0], $check[1], $check[2])) {
+        return checked();
+    };
+} 
+
+  /*   function validate_date($date) {
+        $matches = array();
+        if (!preg_match($pattern, $string, $matches)) return false;
+        if (!checkdate($matches[2], $matches[1], $matches[3])) return false;
+        return true;
+    } */
 
          function validate_time($time) {
-            $pattern = '/^[0-1]{1}[0-9]{1}|[2]{1}[0-3]{1}):[0-5]{1}[0-9]{1}$/';
+           $pattern = "/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/";
         return preg_match($pattern, $time) === 1;
             }
 
-            function isValidDate(string $date, string $format = 'd-m-Y'): bool
+            
+/* 
+            function isValidDate(string $date, string $format = 'F-Y-h'): bool
 {
     $dateObj = DateTime::createFromFormat($format, $date);
     return $dateObj && $dateObj->format($format) == $date;
 }
-
+ */
 
 
 // Valdation End
@@ -147,7 +163,7 @@ function validate_name($name){
     
         else{
             $story["title"]= sanitize_input($article["title"]);
-            if(!validate_text($story["title"])){
+            if(!validate_name($story["title"])){
                 $errors["title"] = "Only letters, spaces and numbers are allowed.";
             }
         }
@@ -158,7 +174,7 @@ function validate_name($name){
     
         else{
             $story["subtitle"]= sanitize_input($article["subtitle"]);
-            if(!validate_text($story["subtitle"])){
+            if(!validate_name($story["subtitle"])){
                 $errors["subtitle"] = "Invalid subtitle format";
             }
         }
@@ -169,7 +185,7 @@ function validate_name($name){
     
         else{
             $story["article"]= sanitize_input($article["article"]);
-            if(!validate_text($story["article"])){
+            if(!validate_name($story["article"])){
                 $errors["article"] = "I have no idea how you did this wrong";
             }
         }
@@ -180,7 +196,7 @@ function validate_name($name){
     
         else{
             $story["date"]= sanitize_input($article["date"]);
-            if(!isValidDate($story["date"])){
+            if(validate_date($story["date"])){
                 $errors["date"] = "Invalid date format";
             }
         }
@@ -191,7 +207,9 @@ function validate_name($name){
     
         else{
             $story["time"]= sanitize_input($article["time"]);
-            
+            if(!validate_time($story["time"])){
+                $errors["time"] = "Wrong time format";
+            }
         }
         
         // // // Validate writer
@@ -199,7 +217,7 @@ function validate_name($name){
              $errors["writer"] = "Not a writer";
          }
     else{
-        $story["writer_id"]= sanitize_input($article["writer"]);
+        $story["writer_id"]= sanitize_input($article["writer_id"]);
     }
         // // Validate genre
          if(!validate_genre($article["genre_id"])){
@@ -207,7 +225,7 @@ function validate_name($name){
          }
 
     else{
-        $story["genre_id"]= sanitize_input($article["genre"]);
+        $story["genre_id"]= sanitize_input($article["genre_id"]);
     }
     
         

@@ -41,7 +41,6 @@ submitBtn.addEventListener('click', onSubmitForm);
 let errorExists = false;
 
 function showError(errorField, errorMessage) {
-
     errorExists = true;
     errorField.innerHTML = errorMessage;
 }
@@ -50,7 +49,7 @@ function regexValid(regex, str) {
     return regex.test(str);
 }
 
-function isSelected(inputField) {
+/* function isSelected(inputField) {
     let selected = false;
     for (let i = 0; i != inputField.length; i++) {
         if (!inputField[i].checked) {
@@ -59,7 +58,7 @@ function isSelected(inputField) {
         }
     }
     return selected;
-}
+} */
 
 function resetValues() {
     errorExists = false;
@@ -74,46 +73,46 @@ function resetValues() {
 }
 
 function onSubmitForm(evt) {
-    evt.preventDefault();
+    //evt.preventDefault();
     resetValues();
 
 
     // Validate Name
     if (headingInput.value === "") {
-        showError(headingError, "The heading field is required js");
+        showError(headingError, "The heading field is required");
     } else if (!regexValid(TEXT_REGEX, firstNameInput.value)) {
-        showError(headingError, "Only letters and spaces are allowed js");
+        showError(headingError, "Only letters and spaces are allowed");
     }
     if (titleInput.value === "") {
-        showError(titleError, "The title field is required js");
+        showError(titleError, "The title field is required");
     } else if (!regexValid(TEXT_REGEX, titleInput.value)) {
-        showError(titleError, "Only letters and spaces are allowed js");
+        showError(titleError, "Only letters and spaces are allowed");
     }
     if (subtitleInput.value === "") {
-        showError(subtitleError, "The subtitle field is required js");
+        showError(subtitleError, "The subtitle field is required");
     } else if (!regexValid(TEXT_REGEX, subtitleInput.value)) {
-        showError(subtitleError, "Only letters and spaces are allowed js");
+        showError(subtitleError, "Only letters and spaces are allowed");
     }
     if (articleInput.value === "") {
-        showError(articleError, "The article field is required js");
+        showError(articleError, "The article field is required");
     } else if (!regexValid(TEXT_REGEX, articleInput.value)) {
-        showError(articleError, "Only letters and spaces are allowed js");
+        showError(articleError, "Only letters and spaces are allowed");
     }
     if (dateInput.value === "") {
-        showError(dateError, "The date field is required js");
+        showError(dateError, "The date field is required");
     } else if (!regexValid(DATE_REGEX, dateInput.value)) {
-        showError(dateError, "Only letters and spaces are allowed js");
+        showError(dateError, "Only letters and spaces are allowed");
     }
     if (timeInput.value === "") {
-        showError(timeError, "The time field is required js");
+        showError(timeError, "The time field is required");
     } else if (!regexValid(TIME_REGEX, timeInput.value)) {
-        showError(timeError, "Only letters and spaces are allowed js");
+        showError(timeError, "Only letters and spaces are allowed");
     }
     // if (writerInput.value === "") {
-    //     showError(writerError, "The writer field is required js");
+    //     showError(writerError, "The writer field is required");
     // }
     // if (genreInput.value === "") {
-    //     showError(genreError, "The genre field is required js");
+    //     showError(genreError, "The genre field is required");
     // }
 
 

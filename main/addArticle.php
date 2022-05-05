@@ -6,24 +6,25 @@
   [$article_data, $errors] = article_validate($_POST);
 
 
-  echo "<pre>\$data =";
-  print_r($data);
-  echo "</pre>";
+  // echo "<pre>\$data =";
+  // print_r($data);
+  // echo "</pre>";
 
-  echo "<pre>\$story =";
-  print_r($story);
-  echo "</pre>";
+  // echo "<pre>\$story =";
+  // print_r($story);
+  // echo "</pre>";
    
-  echo "<pre>\$article_data =";
-  print_r($article_data);
-  echo "</pre>";
+  // echo "<pre>\$article_data =";
+  // print_r($article_data);
+  // echo "</pre>";
    
-  echo "<pre>\$errors =";
-  print_r($errors);
-  echo "</pre>";
-  echo "<pre>\$errors =";
-  print_r($errors);
-  echo "</pre>";
+  // echo "<pre>\$errors =";
+  // print_r($errors);
+  // echo "</pre>";
+  // echo "<pre>\$errors =";
+  // print_r($errors);
+  // echo "</pre>";
+  if(empty($errors)){
 
   try {
     $data = [
@@ -42,14 +43,15 @@
        header("Location: index.php");
       
   } 
-
+  
   
   catch (Exception $e) {
     die("Exception: " . $e->getMessage());
   }
+}
 
   session_start();
   $_SESSION["data"]=$article_data;
   $_SESSION["errors"] = $errors;
-  header("Location: addArticleForm.php");
+  header("Location: index.php");
 ?>

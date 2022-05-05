@@ -185,13 +185,24 @@ h5 {
 }
 
 .box {
-    padding: 10px 10px 10px 10px;
-    background-color: gray;
+    padding: 10px 0px 10px 0px;
+    background-color: rgb(10, 10, 10);
+    color:white;
     text-transform: uppercase;
-    text-decoration: gray;
+    text-decoration: grey;
     border-radius: 10%;
 }
 
 .error {
     color: red;
+}
+.form{
+    display: flex;
+    justify-content: space-around;
+    /* width: fit-content; */
+}
+input{
+    width: 800px
+
+
 }

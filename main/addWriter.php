@@ -10,15 +10,13 @@ echo "</pre>";
 [$writer, $errors] = writer_validate($_POST);
 
    
-// if(empty($errors)){
-
-    
+ if(empty($errors)){
 
   try {
     $data = [
-        'first_name' => $writer['first_name'],
-        'last_name' => $writer['last_name'],
-        'link' => $writer['link']
+        'first_name' => $_POST['first_name'],
+        'last_name' => $_POST['last_name'],
+        'link' => $_POST['link']
       ];
 
 
@@ -47,15 +45,17 @@ echo "</pre>";
       
       
   }
+
    catch (Exception $e) {
     die("Exception: " . $e->getMessage());
   }
+}
     session_start();
-        $_SESSION["data"]=$data;
+        $_SESSION["data"]= $writer;
         $_SESSION["errors"] = $errors;
-        header("Location: addWriterForm.php");
+        header("Location: index.php");
         
-    die("Exception: " . $e->getMessage());
+    //die("Exception: " . $e->getMessage());
   
 
 ?>

@@ -23,6 +23,7 @@ function validate_name($name){
     //   }
     // }
     */
+    //Must begin with https:// to work for example https://www.google.com
     function validate_link($link){
     $pattern=  "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
     return preg_match($pattern, $link) === 1;
@@ -35,7 +36,7 @@ function validate_name($name){
 
 
     }
-
+        //Checks in DD-MM-YYYY Format
          function validate_date($date) {
             $pattern = '/^([0-9]{4})\\-([0-9]{2})\\-([0-9]{2})$/';
              $matches = array(); 
@@ -45,7 +46,7 @@ function validate_name($name){
             }
             return $valid;
             }
-
+            //Validates time in 24 hour format
          function validate_time($time) {
             $pattern = '/^[0-1]{1}[0-9]{1}|[2]{1}[0-3]{1}):[0-5]{1}[0-9]{1}$/';
         return preg_match($pattern, $time) === 1;

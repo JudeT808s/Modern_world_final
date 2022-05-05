@@ -6,11 +6,11 @@
     //  Get::allOrderBy($articles, $date, $limit = 0, $skip = 0);
               
     // $sideArticles = Get::byCategory('Commerce', 4);
-    $suggestedArticles = Get::byCategoryOrderBy('Breaking','date DESC', 4);
+    $sideArticles = Get::allOrderBy('articles','date DESC', 3);
     $story = Get::byId('articles', $_GET['id']);
     $genre = Get::byId('genres', $story->genre_id);
     $categorys = Get::all('genres');
-    $sideArticles = Get::byCategory($genre->name, 3);
+    $suggestedArticles = Get::byCategory($genre->name, 3);
     $writer = Get::byId('writers', $story->writer_id );
     // $writer = Get::byId('writers', $topStories->writer_id );
 
@@ -45,24 +45,28 @@
 
 <body>
     <div class="container">
-    <div class="home box width-1"><a href= "http://localhost/iadt-cc-Y1/modern_world/reimagined-goggles/main/"><h3>home</h3></a></div>
-    <?php foreach($categorys as $category) { ?>
+        <div class="home box width-1"><a href="http://localhost/iadt-cc-Y1/modern_world/reimagined-goggles/main/">
+                <h3>home</h3>
+            </a></div>
+        <?php foreach($categorys as $category) { ?>
         <!-- <div class="genre width-1 "> -->
         <div class="nav-bar box width-1">
-        <h3><a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li></h3>
-        </div> 
+            <h3><a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li>
+            </h3>
+        </div>
         <!-- </div> -->
-<?php } ?>
+        <?php } ?>
 
 
         <div class="mainStory width-8 ">
             <div class="heading width-8">
-                <h2 class="story-header"><?= $story->heading ?></h1>
+                <h2 class="story-header bottom"><?= $story->heading ?></h1>
                     <hr>
             </div>
-            
+
             <h1><?= $story->title ?></h1>
-            <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($story->date , $story->time) ?></p>
+            <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> -
+                <?= mosDateTime($story->date , $story->time) ?></p>
             <h5><?= $story->subtitle ?></h5>
             <div class="nested">
                 <div class="width-12">
@@ -79,7 +83,8 @@
 
 
         <!-- Mini Related Bar-->
-        <div class="Related width-4">
+        <div class="width-1"></div>
+        <div class="Related width-3">
             <h2>Related Stories</h2>
             <!-- <hr> -->
             <?php
@@ -88,17 +93,17 @@
                     
                     ?>
             <div class="side-article width-3">
-            <h2 class="side-header"><?= $sideArticle->heading ?></h2>
+                <h2 class="side-header bottom"><?= $sideArticle->heading ?></h2>
                 <h5><a href="article.php?id=<?=$sideArticle->id ?>"><?= $sideArticle->title ?></a></h5>
                 <p class="preview"><?= $sideArticle->subtitle ?></p>
                 <p class="writer"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($sideArticle->date,  
                      $sideArticle->time) ?></p>
+                <a href="updateArticleForm.php?id=<?= $sideArticle->id ?>"> Edit </a>
 
-<?php
+            </div>
+            <?php               //Counter to skip border bottom to avoid double lines
                      if($counter !== 1){
                          ?>
-                     <hr>
-            </div>
             <?php
                     }
                 }
@@ -106,27 +111,29 @@
         </div>
 
         <!--Suggested Stories-->
-            <!-- <div class="mini-article">
+        <!-- <div class="mini-article">
                 <h2>Related Stories</h2>
                 <hr>
             </div> -->
 
-            <?php
+        <?php
                     foreach($suggestedArticles as  $suggestedArticle){
                         $writer = Get::byId('writers', $suggestedArticle->writer_id);
                     
                     ?>
-            <div class="mini-article width-4">
+        <div class="mini-article width-4">
 
 
-                <h5><a href="article.php?id=<?=$suggestedArticle->id ?>"><?= $suggestedArticle->title ?></a></h5>
-                <p class="writer"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> -
-                    <?= mosDateTime($suggestedArticle->date ,
+            <h5><a href="article.php?id=<?=$suggestedArticle->id ?>"><?= $suggestedArticle->title ?></a></h5>
+            <p class="writer"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> -
+                <?= mosDateTime($suggestedArticle->date ,
                      $suggestedArticle->time) ?></p>
+            <a href="updateArticleForm.php?id=<?= $suggestedArticle->id ?>"> Edit </a>
 
-                    
-            </div>
-            <?php
+
+
+        </div>
+        <?php
                     
                  }
                     ?>

@@ -60,20 +60,21 @@
 
 <body>
     <div class="container">
-    <!-- width-12  -->
-    <!-- <div class="nested"> -->
-    <?php foreach($categorys as $category) { ?>
+        <!-- width-12  -->
+        <!-- <div class="nested"> -->
+        <?php foreach($categorys as $category) { ?>
         <!-- <div class="genre width-1 "> -->
         <div class="nav-bar box width-1">
-        <h3><a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li></h3>
-        </div> 
+            <h3><a href="genre.php?id=<?= $category->id ?>"><?= $category->name?></a></li>
+            </h3>
+        </div>
         <!-- </div> -->
-<?php } ?>
-    <!-- </div> -->
+        <?php } ?>
+        <!-- </div> -->
 
         <div class="topStory width-8 ">
-        <a href= "addWriterForm.php">Add Author </a>
-        <a href= "addArticleForm.php">Add Article </a>
+            <a href="addWriterForm.php">Add Author</a>
+            <a href="addArticleForm.php">Add Article </a>
 
             <div class="heading width-8">
                 <?php
@@ -87,12 +88,13 @@
             </div>
 
             <h1><a href="article.php?id=<?=$topStory->id ?>"><?= $topStory->title ?></a></h1>
-            <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($topStory->date, $topStory->time) ?>
+            <p class="date"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> -
+                <?= mosDateTime($topStory->date, $topStory->time) ?>
             <h5><?= $topStory->subtitle ?></h5>
             <div class="nested">
                 <div class="width-12">
                     <p> <?= nl2br(truncate($topStory->article, 750)) ?>
-                    
+
                     </p>
 
 
@@ -101,26 +103,20 @@
 
 
             </div>
-        <?php
+            <?php
              }
     ?>
             <a href="updateArticleForm.php?id=<?= $topStory->id ?>"> Edit </a>
-            </div>
+        </div>
 
 
         <!-- 1 Grid Gap -->
-        <!-- <div class="width-1"></div> -->
-        <div class="medium width-4">
-            <!-- <div class="medium-text p-bottom">
-                <h2 class="bottom story-header">Breaking</h2>
-                <h4>The Russian threat to invade Ukraine</h4>
-                <p class="preview">The series reminded Turks of the age of the great conquests that expanded
-                    the Ottoman Empire up to the Russian border.</p>
+        <div class="width-1"></div>
+        <div class="medium width-3">
+            <h2>Latest News</h2>
 
-                <p><strong>Zvi Bar'el</strong> - Feb 10, 2022 -2:51PM</p>
-            </div> -->
             <!-- Article loop -->
-            
+
             <?php
                     foreach($sideArticles as $sideArticle){
 
@@ -134,9 +130,10 @@
                 <hr>
                 <h4><a href="article.php?id=<?=$sideArticle->id ?>"><?= $sideArticle->title ?></a></h4>
                 <p class="preview"><?= truncate($sideArticle->subtitle, 100) ?></p>
-                    <div class="writer">
-                <p><strong><?= $writer->first_name ?> <?= $writer->last_name ?></strong> - <?= mosDateTime($sideArticle->date, $sideArticle->time) ?>
-                </p>
+                <div class="writer">
+                    <p><strong><?= $writer->first_name ?> <?= $writer->last_name ?></strong> -
+                        <?= mosDateTime($sideArticle->date, $sideArticle->time) ?>
+                    </p>
                 </div>
                 <a href="updateArticleForm.php?id=<?= $sideArticle->id ?>"> Edit </a>
 
@@ -146,41 +143,27 @@
                     }
 
                     ?>
-                    
+
         </div>
 
 
-        <!-- <h2 class="bottom">Breaking</h2> -->
-        <!-- <hr>
-            <h4>Covid pills are easier to find as the omicron surge subsides</h4>
-            <p class="preview">The supply of Covid-19 antiviral pills is picking up in the country,
-                 state health departments and physicians say, as drug companies like Pfizer churn out more of the treatments.</p>
-
-             <p><strong>Berkeley Lovelace Jr.</strong> - Feb 10, 2022 -2:51PM</p> -->
-    
-    <?php
+        <?php
                     foreach($miniArticles as $miniArticle){
                         $writer = Get::byId('writers', $miniArticle->writer_id)
                     
                     ?>
-    <div class="mini-article width-3">
-        <h5><a href="article.php?id=<?=$miniArticle->id?>"><?= $miniArticle->title ?></a></h5>
-        <p class= "writer"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> - <?= mosDateTime($miniArticle->date , $miniArticle->time) ?></p>
-        <a href="updateArticleForm.php?id=<?= $miniArticle->id ?>"> Edit </a>
+        <div class="mini-article width-3">
+            <h5><a href="article.php?id=<?=$miniArticle->id?>"><?= $miniArticle->title ?></a></h5>
+            <p class="writer"><strong><?= $writer->first_name?> <?= $writer->last_name?></strong> -
+                <?= mosDateTime($miniArticle->date , $miniArticle->time) ?></p>
+            <a href="updateArticleForm.php?id=<?= $miniArticle->id ?>"> Edit </a>
 
-    </div>
-    <?php
+        </div>
+        <?php
                     }
 
                     ?>
-    <!-- <div class="mini width-3">
-        <h5 class="centre">Target lifts mask requirements for Shoppers</h5>
-        <p class="centre"><strong>Doha Madani</strong> - Feb 10, 2022 -2:51PM</p>
-    </div>
-    <div class="mini width-3">
-        <h5 class="centre">The philosopher King</h5>
-        <p class="centre"><strong> Zack Beauchamp</strong> - Feb. 10, 2022 -2:51 PM
-        </p> -->
+
     </div>
     </div>
 </body>

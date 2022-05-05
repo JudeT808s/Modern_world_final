@@ -35,7 +35,7 @@ function regexValid(regex, str) {
     return regex.test(str);
 }
 
-function isSelected(inputField) {
+/* function isSelected(inputField) {
     let selected = false;
     for (let i = 0; i != inputField.length; i++) {
         if (!inputField[i].checked) {
@@ -44,7 +44,7 @@ function isSelected(inputField) {
         }
     }
     return selected;
-}
+} */
 
 function resetValues() {
     errorExists = false;
@@ -54,24 +54,27 @@ function resetValues() {
 }
 
 function onSubmitForm(evt) {
-    evt.preventDefault();
+    //evt.preventDefault();
     resetValues();
 
 
     // Validate Name
     if (firstNameInput.value === "") {
-        showError(firstNameError, "The name field is required js");
-    } else if (!regexValid(NAME_REGEX, firstNameInput.value)) {
-        showError(firstNameError, "Only letters and spaces are allowed js");
+        showError(firstNameError, "The name field is required");
+    } 
+    else if (!regexValid(NAME_REGEX, firstNameInput.value)) {
+        showError(firstNameError, "Only letters and spaces are allowed");
     }
     if (lastNameInput.value === "") {
-        showError(lastNameError, "The name field is required js");
-    } else if (!regexValid(NAME_REGEX, lastNameInput.value)) {
-        showError(lastNameError, "Only letters and spaces are allowed js");
+        showError(lastNameError, "The name field is required");
+    } 
+    else if (!regexValid(NAME_REGEX, lastNameInput.value)) {
+        showError(lastNameError, "Only letters and spaces are allowed");
     }
     if (linkInput.value === "") {
-        showError(linkError, "The link field is required js");
-    } else if (!regexValid(LINK_REGEX, linkInput.value)) {
+        showError(linkError, "The link field is required");
+    } 
+    else if (!regexValid(LINK_REGEX, linkInput.value)) {
         showError(linkError, "Invalid website link");
     }
 

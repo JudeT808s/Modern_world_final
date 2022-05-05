@@ -64,8 +64,8 @@
             $_SESSION["data"]=$article_data;
             $_SESSION["errors"] = $errors;
             header("Location: updateArticleForm.php?id=<?= $genre->id ?>");
-            */
+*/
 
-    die("Exception: " . $e->getMessage());
-  }
+die("Exception: " . $e->getMessage());
+}
 ?>
